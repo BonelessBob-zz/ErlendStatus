@@ -10,7 +10,8 @@ from datetime                   import date
 from googleapiclient.discovery  import build
 from google_auth_oauthlib.flow  import InstalledAppFlow
 
-url = "https://www.youtube.com/results?search_query=meme&sp=EgIIAQ%253D%253D"
+# url = "https://www.youtube.com/results?search_query=meme&sp=EgIIAQ%253D%253D"
+url = "https://www.youtube.com/user/MrLakslaks/videos?vsort=dd"
 r = PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
 
 api_service_name = "youtube"                                                # ←
@@ -28,7 +29,7 @@ begin = date(2011, 10, 7)
 
 
 def exit_handler():                                                 # ←
-    print("[!]EXIT\n Commented videos:", knownVideos)               #  |→   ON EXIT
+    print("[!]EXIT Commented videos:", knownVideos)               #  |→   ON EXIT
 atexit.register(exit_handler)                                       # ←
 
 
@@ -78,10 +79,11 @@ def getComment():
 
     comment = (
             "----------------STATUS----------------\n"
-            f"Du er bare {pewDiePieSubs-erlendSubs} subs unna PewDiePie\n"
-            f"Du er bare {tSeriesSubs - erlendSubs} subs unna T-Series\n"
-            f"Bare {deltaPewds} dager til du tar igjen PewDiePie\n"
-            f"Bare {deltaTSeries} dager til du tar igjen T-Series\n"
+            f"Erlend er bare {pewDiePieSubs-erlendSubs} subs unna PewDiePie\n"
+            f"Erlend er bare {tSeriesSubs - erlendSubs} subs unna T-Series\n"
+            f"Bare {deltaPewds} dager til Erlend tar igjen PewDiePie\n"
+            f"Bare {deltaTSeries} dager til Erlend tar igjen T-Series\n"
+            "\n\n\nKildekode: "
     )
 
     return comment
@@ -103,19 +105,22 @@ def main():
     # MAIN LOOP
     while True:
         cycle += 1                                                                  # JUST A COUNTER FOR CONVINIENCE
-        print("Cycle:", cycle)                                                      # ↑
+        print("Cycle:", cycle, "\n")                                                      # ↑
 
-        # newVideoID = getNewVideo()                                                     #  ←
-        # print(newVideoID)                                                              #   |
-        # if newVideoID != video:                                                        #   |
-        #     if newVideoID not in knownVideos:                                          #   |
-        #         # WHEN NEW VIDEO FOUND:                                                #    →  LIKES AND COMMENTS ON NEW VIDEO BY CHECKING IF IT IS IN KNOWN VIDEOS LIST
-        #         knownVideos.append(newVideoID)                                         #   |
-        #         youtube.videos().rate(rating='like', id=newVideoID).execute()          #   |
-        #         print(doneVideos)                                                      #   |
-        #         print("New Video:", newVideoID, "\n\n")                                #  ←
+        newVideoID = getNewVideo()                                                    #  ←
+        print(newVideoID)                                                             #   |
+        if newVideoID != video:                                                       #   |
+            if newVideoID not in knownVideos:                                         #   |
+                # WHEN NEW VIDEO FOUND:                                               #    →  LIKES AND COMMENTS ON NEW VIDEO BY CHECKING IF IT IS IN KNOWN VIDEOS LIST
+                knownVideos.append(newVideoID)                                        #   |
+                youtube.videos().rate(rating='like', id=newVideoID).execute()         #   |
+                print("New Video:", newVideoID, "\n\n")                               #   |
+                insertComment(newVideoID, getComment())                               #   |
+                print("Comment:", getComment())                                       #   |
+                print("Known Videos:", knownVideos)                                   #   |
+                video = newVideoID                                                    #  ←
 
-        sleep(10)                                                                       # PAUSES TO NOT OVERWHELM YOUTUBE'S API
+        sleep(10)                                                                     # PAUSES TO NOT OVERWHELM YOUTUBE'S API
 
 
 # RUNS CODE IF THIS FILE IS THE SOURCE FILE
