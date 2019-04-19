@@ -79,12 +79,17 @@ def getComment():
 
     comment = (
             "----------------STATUS----------------\n"
-            f"Erlend er bare {pewDiePieSubs-erlendSubs} subs unna PewDiePie\n"
-            f"Erlend er bare {tSeriesSubs - erlendSubs} subs unna T-Series\n"
-            f"Bare {deltaPewds} dager til Erlend tar igjen PewDiePie\n"
-            f"Bare {deltaTSeries} dager til Erlend tar igjen T-Series\n"
+            "Erlend er bare {} subs unna PewDiePie\n"
+            "Erlend er bare {} subs unna T-Series\n"
+            "Bare {} dager til Erlend tar igjen PewDiePie\n"
+            "Bare {} dager til Erlend tar igjen T-Series\n"
             "\n\n\nKildekode: https://github.com/BonelessBob/ErlendStatus\n"
-    )
+    ).format(
+        pewDiePieSubs-erlendSubs,
+        tSeriesSubs - erlendSubs,
+        deltaPewds,
+        deltaTSeries
+             )
 
     return comment
 
@@ -119,7 +124,7 @@ def main():
                 print("Known Videos:", knownVideos, "\n")                             #   |
                 video = newVideoID                                                    #  ←
 
-        sleep(10)                                                                     # PAUSES TO NOT OVERWHELM YOUTUBE'S API
+        sleep(30)                                                                     # PAUSES TO NOT OVERWHELM YOUTUBE'S API
 
 
 # RUNS CODE IF THIS FILE IS THE SOURCE FILE
