@@ -21,16 +21,16 @@ CLIENT_SECRET = "client_secret.json"                                        #  |
 SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']              #  |→   YOUTUBE API SHIT
                                                                             #  |
 flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET, SCOPES)     #  |
-credentials = flow.run_console()                                                  #  |
-youtube = build(api_service_name, api_version, credentials=credentials)         # ←
+credentials = flow.run_console()                                            #  |
+youtube = build(api_service_name, api_version, credentials=credentials)     # ←
 
 knownVideos = []
 begin = date(2011, 10, 7)
 
 
-def exit_handler():                                                 # ←
+def exit_handler():                                               # ←
     print("[!]EXIT Commented videos:", knownVideos)               #  |→   ON EXIT
-atexit.register(exit_handler)                                       # ←
+atexit.register(exit_handler)                                     # ←
 
 
 # GETS NEW VIDEO BY PARSING HTML... This was a pain to make
@@ -83,7 +83,7 @@ def getComment():
             f"Erlend er bare {tSeriesSubs - erlendSubs} subs unna T-Series\n"
             f"Bare {deltaPewds} dager til Erlend tar igjen PewDiePie\n"
             f"Bare {deltaTSeries} dager til Erlend tar igjen T-Series\n"
-            "\n\n\nKildekode: "
+            "\n\n\nKildekode: https://github.com/BonelessBob/ErlendStatus\n"
     )
 
     return comment
@@ -108,7 +108,6 @@ def main():
         print("Cycle:", cycle, "\n")                                                      # ↑
 
         newVideoID = getNewVideo()                                                    #  ←
-        print(newVideoID)                                                             #   |
         if newVideoID != video:                                                       #   |
             if newVideoID not in knownVideos:                                         #   |
                 # WHEN NEW VIDEO FOUND:                                               #    →  LIKES AND COMMENTS ON NEW VIDEO BY CHECKING IF IT IS IN KNOWN VIDEOS LIST
@@ -117,7 +116,7 @@ def main():
                 print("New Video:", newVideoID, "\n\n")                               #   |
                 insertComment(newVideoID, getComment())                               #   |
                 print("Comment:", getComment())                                       #   |
-                print("Known Videos:", knownVideos)                                   #   |
+                print("Known Videos:", knownVideos, "\n")                             #   |
                 video = newVideoID                                                    #  ←
 
         sleep(10)                                                                     # PAUSES TO NOT OVERWHELM YOUTUBE'S API
