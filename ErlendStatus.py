@@ -83,7 +83,7 @@ def getComment():
             "Erlend er bare {} subs unna T-Series\n"
             "Bare {} dager til Erlend tar igjen PewDiePie\n"
             "Bare {} dager til Erlend tar igjen T-Series\n"
-            "\n\n\nKildekode: https://github.com/BonelessBob/ErlendStatus\n"
+            "\n\n\n\nKildekode: https://github.com/BonelessBob/ErlendStatus\n"
     ).format(
         pewDiePieSubs-erlendSubs,
         tSeriesSubs - erlendSubs,
