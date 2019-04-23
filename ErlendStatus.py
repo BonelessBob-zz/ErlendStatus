@@ -109,8 +109,8 @@ def main():
 
     # MAIN LOOP
     while True:
-        cycle += 1                                                                  # JUST A COUNTER FOR CONVINIENCE
-        print("Cycle:", cycle, "\n")                                                      # ↑
+        #cycle += 1                                                                  # JUST A COUNTER FOR CONVINIENCE
+        #print("Cycle:", cycle, "\n")                                                # ↑
 
         newVideoID = getNewVideo()                                                    #  ←
         if newVideoID != video:                                                       #   |
