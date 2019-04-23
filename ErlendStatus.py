@@ -103,28 +103,28 @@ def main():
     cycle = 0
     video = getNewVideo()                                                           # GETS NEWEST VIDEO
     knownVideos.append(video)                                                       # ADDS IT TO LIST OF KNOWN VIDEOS
-    # youtube.videos().rate(rating='like', id=video).execute()                        # LIKES VIDEO
+    youtube.videos().rate(rating='like', id=video).execute()                        # LIKES VIDEO
     print(getComment())                                                             # PRINTS STATUS COMMENT
-    # insertComment(video, getComment())                                              # POSTS COMMENT ON NEWEST VIDEO
+    insertComment(video, getComment())                                              # POSTS COMMENT ON NEWEST VIDEO
 
     # MAIN LOOP
-    # while True:
-    #     cycle += 1                                                                  # JUST A COUNTER FOR CONVINIENCE
-    #     print("Cycle:", cycle, "\n")                                                      # ↑
-    #
-    #     newVideoID = getNewVideo()                                                    #  ←
-    #     if newVideoID != video:                                                       #   |
-    #         if newVideoID not in knownVideos:                                         #   |
-    #             # WHEN NEW VIDEO FOUND:                                               #    →  LIKES AND COMMENTS ON NEW VIDEO BY CHECKING IF IT IS IN KNOWN VIDEOS LIST
-    #             knownVideos.append(newVideoID)                                        #   |
-    #             youtube.videos().rate(rating='like', id=newVideoID).execute()         #   |
-    #             print("New Video:", newVideoID, "\n\n")                               #   |
-    #             insertComment(newVideoID, getComment())                               #   |
-    #             print("Comment:", getComment())                                       #   |
-    #             print("Known Videos:", knownVideos, "\n")                             #   |
-    #             video = newVideoID                                                    #  ←
-    #
-    #     sleep(30)                                                                     # PAUSES TO NOT OVERWHELM YOUTUBE'S API
+    while True:
+        cycle += 1                                                                  # JUST A COUNTER FOR CONVINIENCE
+        print("Cycle:", cycle, "\n")                                                      # ↑
+
+        newVideoID = getNewVideo()                                                    #  ←
+        if newVideoID != video:                                                       #   |
+            if newVideoID not in knownVideos:                                         #   |
+                # WHEN NEW VIDEO FOUND:                                               #    →  LIKES AND COMMENTS ON NEW VIDEO BY CHECKING IF IT IS IN KNOWN VIDEOS LIST
+                knownVideos.append(newVideoID)                                        #   |
+                youtube.videos().rate(rating='like', id=newVideoID).execute()         #   |
+                print("New Video:", newVideoID, "\n\n")                               #   |
+                insertComment(newVideoID, getComment())                               #   |
+                print("Comment:", getComment())                                       #   |
+                print("Known Videos:", knownVideos, "\n")                             #   |
+                video = newVideoID                                                    #  ←
+
+        sleep(30)                                                                     # PAUSES TO NOT OVERWHELM YOUTUBE'S API
 
 
 # RUNS CODE IF THIS FILE IS THE SOURCE FILE
