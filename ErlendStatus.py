@@ -25,7 +25,7 @@ credentials = flow.run_console()                                            #  |
 youtube = build(api_service_name, api_version, credentials=credentials)     # ←
 
 knownVideos = []
-begin = date(2011, 10, 7)
+begin = date(2019, 3, 12)
 
 
 def exit_handler():                                               # ←
@@ -74,11 +74,11 @@ def getComment():
 
 
     daysActive = int(str(date.today() - begin).split(' ')[0])
-    deltaPewds = daysActive*(pewDiePieSubs/erlendSubs)
-    deltaTSeries = daysActive*(tSeriesSubs/erlendSubs)
+    deltaPewDiePie = pewDiePieSubs/(erlendSubs/daysActive)
+    deltaTSeries = tSeriesSubs/(erlendSubs/daysActive)
 
     comment = (
-            "----------------STATUS----------------\n"
+            "=============STATUS=============\n"
             "Erlend er bare {} subs unna PewDiePie\n"
             "Erlend er bare {} subs unna T-Series\n"
             "Bare {} dager til Erlend tar igjen PewDiePie\n"
@@ -87,7 +87,7 @@ def getComment():
     ).format(
         pewDiePieSubs-erlendSubs,
         tSeriesSubs - erlendSubs,
-        deltaPewds,
+        deltaPewDiePie,
         deltaTSeries
              )
 
@@ -124,7 +124,7 @@ def main():
     #             print("Known Videos:", knownVideos, "\n")                             #   |
     #             video = newVideoID                                                    #  ←
     #
-    sleep(30)                                                                     # PAUSES TO NOT OVERWHELM YOUTUBE'S API
+    #     sleep(30)                                                                     # PAUSES TO NOT OVERWHELM YOUTUBE'S API
 
 
 # RUNS CODE IF THIS FILE IS THE SOURCE FILE
